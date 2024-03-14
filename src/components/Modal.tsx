@@ -9,8 +9,9 @@ const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
   const [book, setBook] = useState({
     title: "",
     author: "",
-    pages: 0,
+    pages: '',
     isRead: false,
+    id:crypto.randomUUID()
   });
 
   const titleHandler = (e) => {
@@ -32,7 +33,6 @@ const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
     e.preventDefault()
     setIsModalActive(false)
     setBooks([...books, book]);
-    console.log(books)
   };
 
   return (
