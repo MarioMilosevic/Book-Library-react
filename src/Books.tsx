@@ -2,7 +2,7 @@ import Book from "./Book"
 const Books = () => {
   return (
     <>
-    <div className="w-[1280px] mx-auto flex justify-between">
+    <div className="w-[1200px] mx-auto grid grid-cols-3 gap-8">
         <Book/>
         <Book/>
         <Book/>
