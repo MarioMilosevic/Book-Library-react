@@ -11,15 +11,7 @@ interface Book {
 }
 function App() {
   const [isModalActive, setIsModalActive] = useState(false);
-  const [books, setBooks] = useState<Book[]>([
-    {
-      id: crypto.randomUUID(),
-      title: "Mario",
-      author: "Milosevic",
-      pages: 300,
-      isRead: false,
-    },
-  ]);
+  const [books, setBooks] = useState<Book[]>([]);
 
   return (
     <>
