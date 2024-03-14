@@ -9,6 +9,7 @@ const InputField = ({ heading, placeholder, id }: InputField) => {
     <div className="w-full flex justify-between mb-4">
       <label htmlFor={id}>{heading}</label>
       <input
+      
         id={id}
         type="text"
         placeholder={placeholder}

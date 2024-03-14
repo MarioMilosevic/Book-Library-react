@@ -1,11 +1,9 @@
 import Book from "./Book";
-const Books = () => {
+const Books = ({books}) => {
   return (
     <>
       <div className="w-[1200px] mx-auto grid grid-cols-3 gap-8">
-        <Book />
-        <Book />
-        <Book />
+        {books.map(book => <Book key={book.id} title={book.title} author={book.author} pages={book.pages} isRead={book.isRead} />)}
       </div>
     </>
   );
