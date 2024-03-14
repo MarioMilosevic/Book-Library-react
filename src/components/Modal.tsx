@@ -2,8 +2,10 @@ import { useState } from "react";
 import InputField from "./InputField";
 interface Modal {
   setIsModalActive: () => void;
+  setBooks: () => void;
+  books: Book[];
 }
-const Modal = ({ setIsModalActive }: Modal) => {
+const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
   const [book, setBook] = useState({
     title: "",
     author: "",
@@ -24,6 +26,13 @@ const Modal = ({ setIsModalActive }: Modal) => {
   };
   const checkBoxHandler = (e) => {
     setBook((prev) => ({ ...prev, isRead: e.target.checked }));
+  };
+
+  const booksHandler = (e) => {
+    e.preventDefault()
+    setIsModalActive(false)
+    setBooks([...books, book]);
+    console.log(books)
   };
 
   return (
@@ -62,7 +71,7 @@ const Modal = ({ setIsModalActive }: Modal) => {
             <input type="checkbox" onChange={checkBoxHandler} />
             <span>Have you read this book ?</span>
           </div>
-          <button className="bg-sky-500 text-sky-50 px-4 py-2 text-xl rounded-lg hover:bg-sky-600">
+          <button className="bg-sky-500 text-sky-50 px-4 py-2 text-xl rounded-lg hover:bg-sky-600" onClick={booksHandler}>
             Submit
           </button>
         </div>

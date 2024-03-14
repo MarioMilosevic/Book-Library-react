@@ -17,7 +17,7 @@ function App() {
     <>
       <Header setIsModalActive={setIsModalActive} />
       <Books books={books} />
-      {isModalActive && <Modal setIsModalActive={setIsModalActive} />}
+      {isModalActive && <Modal books={books} setBooks={setBooks} setIsModalActive={setIsModalActive} />}
     </>
   );
 }
