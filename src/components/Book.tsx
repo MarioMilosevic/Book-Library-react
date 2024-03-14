@@ -1,4 +1,5 @@
 const Book = ({ title, author, pages, isRead, id, books, setBooks }) => {
+  
   const toggleIsRead = (id) => {
     setBooks(
       books.map((book) =>
@@ -7,7 +8,9 @@ const Book = ({ title, author, pages, isRead, id, books, setBooks }) => {
     );
   };
 
-  
+  const deleteBook = (id) => {
+    setBooks(books.filter((book) => book.id !== id ))
+  }
 
   return (
     <div className="ring rounded-lg  shadow-xl text-center py-8">
@@ -21,7 +24,7 @@ const Book = ({ title, author, pages, isRead, id, books, setBooks }) => {
         >
           {isRead ? "Read ✅" : "Not Read ❌"}
         </button>
-        <button className="bg-fuchsia-400 text-xl text-fuchsia-50 rounded-lg px-4 py-2 duration-300 hover:scale-110">
+        <button className="bg-fuchsia-400 text-xl text-fuchsia-50 rounded-lg px-4 py-2 duration-300 hover:scale-110" onClick={() => deleteBook(id)}>
           Delete
         </button>
       </div>
