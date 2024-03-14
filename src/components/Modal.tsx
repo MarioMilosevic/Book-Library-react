@@ -15,15 +15,17 @@ const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
   });
 
   const titleHandler = (e) => {
-    setBook((prev) => ({ ...prev, title: e.target.value }));
+      setBook((prev) => ({ ...prev, title: e.target.value }));
   };
 
   const authorHandler = (e) => {
-    setBook((prev) => ({ ...prev, author: e.target.value }));
+      setBook((prev) => ({ ...prev, author: e.target.value }));
   };
 
   const pagesHandler = (e) => {
-    setBook((prev) => ({ ...prev, pages: e.target.value }));
+    if(!isNaN(e.target.value)){
+      setBook((prev) => ({ ...prev, pages: e.target.value }));
+    }
   };
   const checkBoxHandler = (e) => {
     setBook((prev) => ({ ...prev, isRead: e.target.checked }));
