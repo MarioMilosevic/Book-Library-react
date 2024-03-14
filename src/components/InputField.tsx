@@ -1,4 +1,10 @@
-const InputField = ({ heading, placeholder, id }) => {
+interface InputField {
+  heading: string;
+  placeholder: string;
+  id: string;
+}
+
+const InputField = ({ heading, placeholder, id }: InputField) => {
   return (
     <div className="w-full flex justify-between mb-4">
       <label htmlFor={id}>{heading}</label>
