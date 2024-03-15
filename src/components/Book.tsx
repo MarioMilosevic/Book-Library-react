@@ -1,6 +1,18 @@
-const Book = ({ title, author, pages, isRead, id, books, setBooks }) => {
-  
-  const toggleIsRead = (id) => {
+import { Dispatch, SetStateAction } from "react";
+import {Book as BookType} from "../App"
+interface Book {
+  title:string,
+  author:string,
+  pages:number | string,
+  isRead: boolean,
+  id:number | string,
+  books: BookType[];
+  setBooks: Dispatch<SetStateAction<BookType[]>>;
+
+}
+
+const Book = ({ title, author, pages, isRead, id, books, setBooks }:Book) => {
+  const toggleIsRead = (id:number | string) => {
     setBooks(
       books.map((book) =>
         book.id === id ? { ...book, isRead: !book.isRead } : book
@@ -8,7 +20,7 @@ const Book = ({ title, author, pages, isRead, id, books, setBooks }) => {
     );
   };
 
-  const deleteBook = (id) => {
+  const deleteBook = (id: number | string) => {
     setBooks(books.filter((book) => book.id !== id ))
   }
 

@@ -2,10 +2,10 @@ import Header from "./components/Header";
 import Books from "./components/Books";
 import Modal from "./components/Modal";
 import { useState } from "react";
-interface Book {
+export interface Book {
   title: string;
   author: string;
-  pages: number;
+  pages: number | string;
   isRead: boolean;
   id: string;
 }

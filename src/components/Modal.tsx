@@ -1,39 +1,40 @@
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction, MouseEventHandler } from "react";
+import { Book } from "../App";
 import InputField from "./InputField";
 interface Modal {
-  setIsModalActive: () => void;
-  setBooks: () => void;
+  setIsModalActive: (isActive: boolean) => void;
+  setBooks: Dispatch<SetStateAction<Book[]>>;
   books: Book[];
 }
 const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
   const [book, setBook] = useState({
     title: "",
     author: "",
-    pages: '',
+    pages: "",
     isRead: false,
-    id:crypto.randomUUID()
+    id: crypto.randomUUID(),
   });
 
-  const titleHandler = (e) => {
-      setBook((prev) => ({ ...prev, title: e.target.value }));
+  const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBook((prev) => ({ ...prev, title: e.target.value }));
   };
 
-  const authorHandler = (e) => {
-      setBook((prev) => ({ ...prev, author: e.target.value }));
+  const authorHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBook((prev) => ({ ...prev, author: e.target.value }));
   };
 
-  const pagesHandler = (e) => {
-    if(!isNaN(e.target.value)){
+  const pagesHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNaN(parseInt(e.target.value, 10))) {
       setBook((prev) => ({ ...prev, pages: e.target.value }));
     }
   };
-  const checkBoxHandler = (e) => {
+  const checkBoxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBook((prev) => ({ ...prev, isRead: e.target.checked }));
   };
 
-  const booksHandler = (e) => {
-    e.preventDefault()
-    setIsModalActive(false)
+  const booksHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    setIsModalActive(false);
     setBooks([...books, book]);
   };
 
@@ -73,7 +74,10 @@ const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
             <input type="checkbox" onChange={checkBoxHandler} />
             <span>Have you read this book ?</span>
           </div>
-          <button className="bg-sky-500 text-sky-50 px-4 py-2 text-xl rounded-lg hover:bg-sky-600" onClick={booksHandler}>
+          <button
+            className="bg-sky-500 text-sky-50 px-4 py-2 text-xl rounded-lg hover:bg-sky-600"
+            onClick={booksHandler}
+          >
             Submit
           </button>
         </div>

@@ -1,4 +1,9 @@
-const Header = ({setIsModalActive}) => {
+interface Header {
+  setIsModalActive: (isActive:boolean) => void;
+
+}
+const Header = ({setIsModalActive}:Header) => {
+
   return (
     <div className="pt-20 text-center pb-20">
       <h1 className="text-5xl pb-8 font-semibold">Book Library</h1>

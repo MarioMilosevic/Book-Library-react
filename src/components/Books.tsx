@@ -1,5 +1,12 @@
 import Book from "./Book";
-const Books = ({books, setBooks}) => {
+import { Dispatch, SetStateAction } from "react";
+import {Book as BookType} from '../App'
+
+interface Books {
+  setBooks: Dispatch<SetStateAction<BookType[]>>;
+  books: BookType[];
+}
+const Books = ({books, setBooks}:Books) => {
   return (
     <>
       <div className="w-[1200px] mx-auto grid grid-cols-3 gap-8">

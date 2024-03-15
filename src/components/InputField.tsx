@@ -1,10 +1,12 @@
-interface InputField {
+interface InputFieldType {
   heading: string;
   placeholder: string;
   id: string;
+  value: string;
+  inputHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const InputField = ({ heading, placeholder, id, value, inputHandler}: InputField) => {
+const InputField = ({ heading, placeholder, id, value, inputHandler}: InputFieldType) => {
   
   return (
     <div className="w-full flex justify-between mb-4">
