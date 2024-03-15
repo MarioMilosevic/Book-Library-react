@@ -1,12 +1,14 @@
 import Header from "./components/Header";
 import Books from "./components/Books";
-import Modal from "./components/Form";
+import Form from "./components/Form";
 import { useState } from "react";
+
 export interface Book {
   title: string;
   author: string;
   pages: number | string;
   isRead: boolean;
+  isEditing:boolean;
   id: string;
 }
 function App() {
@@ -17,7 +19,7 @@ function App() {
     <>
       <Header setIsModalActive={setIsModalActive} />
       <Books books={books} setBooks={setBooks}/>
-      {isModalActive && <Modal books={books} setBooks={setBooks} setIsModalActive={setIsModalActive} />}
+      {isModalActive && <Form books={books} setBooks={setBooks} setIsModalActive={setIsModalActive} />}
     </>
   );
 }

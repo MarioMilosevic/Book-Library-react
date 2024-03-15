@@ -12,6 +12,7 @@ const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
     author: "",
     pages: "",
     isRead: false,
+    isEditing:false,
     id: crypto.randomUUID(),
   });
 
