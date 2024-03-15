@@ -1,44 +1,32 @@
-import { Dispatch, SetStateAction } from "react";
-import {Book as BookType} from "../App"
+import ActionButton from "./ActionButton";
 interface Book {
-  title:string,
-  author:string,
-  pages:number | string,
-  isRead: boolean,
-  id:number | string,
-  books: BookType[];
-  setBooks: Dispatch<SetStateAction<BookType[]>>;
-
+  title: string;
+  author: string;
+  pages: number | string;
+  isRead: boolean;
+  id: number | string;
+  toggleIsRead: (id: number | string) => void;
+  deleteBook: (id: number | string) => void;
 }
 
-const Book = ({ title, author, pages, isRead, id, books, setBooks }:Book) => {
-  const toggleIsRead = (id:number | string) => {
-    setBooks(
-      books.map((book) =>
-        book.id === id ? { ...book, isRead: !book.isRead } : book
-      )
-    );
-  };
-
-  const deleteBook = (id: number | string) => {
-    setBooks(books.filter((book) => book.id !== id ))
-  }
-
+const Book = ({
+  title,
+  author,
+  pages,
+  isRead,
+  id,
+  toggleIsRead,
+  deleteBook,
+}: Book) => {
   return (
     <div className="ring rounded-lg  shadow-xl text-center py-8">
       <h1 className="text-3xl pb-4">{title}</h1>
       <h2 className="text-2xl pb-4">{author}</h2>
       <span className="text-xl">{pages} pages</span>
-      <div className="pt-8 flex justify-center gap-12">
-        <button
-          className="bg-sky-500 text-xl text-sky-50 rounded-lg px-4 py-2 duration-300 hover:scale-110"
-          onClick={() => toggleIsRead(id)}
-        >
-          {isRead ? "Read ✅" : "Not Read ❌"}
-        </button>
-        <button className="bg-fuchsia-400 text-xl text-fuchsia-50 rounded-lg px-4 py-2 duration-300 hover:scale-110" onClick={() => deleteBook(id)}>
-          Delete
-        </button>
+      <div className="pt-8 flex justify-center gap-8">
+         <ActionButton handleClick={() => toggleIsRead(id)} color={`bg-sky-400`}> {isRead ? "Read ✔" : "Not Read ❌"}</ActionButton>
+         <ActionButton handleClick={() => console.log("edit")} color={`bg-emerald-400`}>Edit</ActionButton>
+         <ActionButton handleClick={() => deleteBook(id)} color={"bg-fuchsia-400"}>Delete</ActionButton>
       </div>
     </div>
   );
