@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import Books from "./components/Books";
-import Modal from "./components/Modal";
+import Modal from "./components/Form";
 import { useState } from "react";
 export interface Book {
   title: string;
