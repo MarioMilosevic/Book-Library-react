@@ -21,6 +21,7 @@ const Book = ({
   toggleIsRead,
   deleteBook,
   editFormHandler,
+  book
 }: Book) => {
   return (
     <div className="ring rounded-lg  shadow-xl text-center py-8">

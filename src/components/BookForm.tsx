@@ -11,10 +11,10 @@ const BookForm = ({
   title,
   author,
   pages,
+  isEditing,
   editFormHandler,
   id,
   isRead,
-  toggleIsRead,
   books,
   setBooks,
   bookData,
@@ -23,34 +23,39 @@ const BookForm = ({
   authorHandler,
   pagesHandler,
   editBook,
-  mario,
+  book,
 }: BookFormType) => {
-  const [formValue, setFormValue] = useState({
-    title: mario.title,
-    author: mario.author,
-    pages: mario.pages,
-    isRead: mario.isRead,
-    isEditing: mario.isEditing,
-    id: mario.id,
-  });
+
+  const initialFormState = {
+    title,
+    author,
+    pages,
+    isRead,
+    isEditing,
+    id,
+  }
+  const [formValue, setFormValue] = useState(initialFormState
+  );
 
   const updateBook = (id: number | string) => {
-    setBooks((prevBooks) =>
-      prevBooks.map((book) =>
-        book.id === id ? { ...book, ...bookData } : book
+    setBooks((books) =>
+      books.map((book) =>
+        book.id === id ? { ...formValue } : book
       )
     );
-    // setBooks([...books, bookData]);
+    console.log(formValue)
+    setFormValue(initialFormState)
     editFormHandler(id);
   };
 
-  // const mario = (id) => {
-  //   setBooks(
-  //     books.map((book) =>
-  //       book.id === id ? { ...book, isRead: !book.isRead } : book
-  //     )
-  //   );
-  // }
+  const toggleIsRead = (id: number | string) => {
+    console.log(books)
+    setBooks(
+      books.map((book) =>
+        book.id === id ? { ...book, isRead: !book.isRead } : book
+      )
+    );
+  };
 
   const updatePages = (e) => {
     const inputValue = e.target.value < 0 ? 0 : e.target.value;
@@ -83,8 +88,8 @@ const BookForm = ({
       ></input>
       <div className="pt-8 flex justify-center gap-8">
         {/* <ActionButton handleClick={() => toggleIsRead(id)} color={`bg-sky-400`}> */}
-        <ActionButton handleClick={() => mario(id)} color={`bg-sky-400`}>
-          {formValue.isRead ? "Read ✔" : "Not Read ❌"}
+        <ActionButton handleClick={() => toggleIsRead(id)} color={`bg-sky-400`}>
+          {isRead ? "Read ✔" : "Not Read ❌"}
         </ActionButton>
         <ActionButton color="bg-sky-400" handleClick={() => updateBook(id)}>
           Save Changes

@@ -39,11 +39,7 @@ function App() {
         setBooks={setBooks}
         bookData={bookData}
         setBookData={setBookData}
-        // titleHandler={titleHandler}
-        // authorHandler={authorHandler}
-        // pagesHandler={pagesHandler}
         booksHandler={booksHandler}
-        // checkBoxHandler={checkBoxHandler}
       />
       {isModalActive && (
         <Form
@@ -52,11 +48,7 @@ function App() {
           books={books}
           setBooks={setBooks}
           setIsModalActive={setIsModalActive}
-          // titleHandler={titleHandler}
-          // authorHandler={authorHandler}
-          // pagesHandler={pagesHandler}
           booksHandler={booksHandler}
-          // checkBoxHandler={checkBoxHandler}
         />
       )}
     </>
