@@ -1,42 +1,60 @@
 import { useState, Dispatch, SetStateAction, MouseEventHandler } from "react";
 import { Book } from "../App";
 import InputField from "./InputField";
-interface Modal {
+interface Form {
   setIsModalActive: (isActive: boolean) => void;
   setBooks: Dispatch<SetStateAction<Book[]>>;
   books: Book[];
 }
-const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
-  const [book, setBook] = useState({
+const Form = ({
+  setIsModalActive,
+  setBooks,
+  books,
+  bookData,
+  setBookData,
+  // titleHandler,
+  // authorHandler,
+  // pagesHandler,
+  booksHandler,
+}: Form) => {
+  const [value, setValue] = useState({
     title: "",
     author: "",
     pages: "",
     isRead: false,
-    isEditing:false,
-    id: crypto.randomUUID(),
   });
 
-  const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBook((prev) => ({ ...prev, title: e.target.value }));
-  };
-
-  const authorHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBook((prev) => ({ ...prev, author: e.target.value }));
-  };
-
-  const pagesHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isNaN(parseInt(e.target.value, 10))) {
-      setBook((prev) => ({ ...prev, pages: e.target.value }));
-    }
-  };
-  const checkBoxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBook((prev) => ({ ...prev, isRead: e.target.checked }));
-  };
-
-  const booksHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsModalActive(false);
-    setBooks([...books, book]);
+    const newBook = {
+      title: value.title,
+      author: value.author,
+      pages: value.pages,
+      isRead: value.isRead,
+    };
+    setBooks((prev) => [...prev, newBook]);
+    setValue({
+      title: "",
+    author: "",
+    pages: "",
+    isRead: false,
+    });
+    setIsModalActive(false)
+  };
+
+  const titleHandler2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((prev) => ({ ...prev, title: e.target.value }));
+  };
+
+  const authorHandler2 = (e) => {
+    setValue((prev) => ({ ...prev, author: e.target.value }));
+  };
+  const pagesHandler2 = (e) => {
+    setValue((prev) => ({ ...prev, pages: e.target.value }));
+  };
+
+  const checkBoxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((prev) => ({ ...prev, isRead: e.target.checked }));
   };
 
   return (
@@ -51,23 +69,21 @@ const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
         <InputField
           heading="Title of the book:"
           placeholder="Lord of the Rings"
-          value={book.title}
           id={"title"}
-          inputHandler={titleHandler}
+          value={value.title}
+          inputHandler={titleHandler2}
         />
         <InputField
           heading="Author:"
           placeholder="J.R.R. Tolkien"
-          value={book.author}
           id={"author"}
-          inputHandler={authorHandler}
+          inputHandler={authorHandler2}
         />
         <InputField
           heading="Number of pages:"
           placeholder="300"
-          value={book.pages}
           id={"pages"}
-          inputHandler={pagesHandler}
+          inputHandler={pagesHandler2}
         />
 
         <div className="pt-10 gap-12 flex items-center justify-between ">
@@ -77,7 +93,7 @@ const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
           </div>
           <button
             className="bg-sky-500 text-sky-50 px-4 py-2 text-xl rounded-lg hover:bg-sky-600"
-            onClick={booksHandler}
+            onClick={handleSubmit}
           >
             Submit
           </button>
@@ -87,4 +103,4 @@ const Modal = ({ setIsModalActive, setBooks, books }: Modal) => {
   );
 };
 
-export default Modal;
+export default Form;

@@ -28,9 +28,10 @@ const Book = ({
       <h2 className="text-2xl pb-4">{author}</h2>
       <span className="text-xl">{pages} pages</span>
       <div className="pt-8 flex justify-center gap-8">
-        <ActionButton handleClick={() => toggleIsRead(id)} color={`bg-sky-400`}>
+        <ActionButton color={`bg-sky-400`}>
           {isRead ? "Read ✔" : "Not Read ❌"}
         </ActionButton>
+      
         <ActionButton
           handleClick={() => editFormHandler(id)}
           color={`bg-emerald-400`}
