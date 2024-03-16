@@ -19,7 +19,7 @@ const Books = ({
   checkBoxHandler,
 }: Books) => {
 
-  const [bookState, setBookState] = useState(bookData)
+  // const [bookState, setBookState] = useState(bookData)
 
   const toggleIsRead = (id: number | string) => {
     setBooks(
@@ -41,6 +41,10 @@ const Books = ({
     setBooks(books.filter((book) => book.id !== id));
   };
 
+  const editBook = (mario, id) => {
+    setBooks(books.map(book => book.id === id ? {...book, mario, isEditing:!book.isEditing} : book))
+  }
+
   return (
     <>
       <div className="w-[1200px] mx-auto grid grid-cols-3 gap-8">
@@ -49,6 +53,7 @@ const Books = ({
            return book.isEditing ? (
             <BookForm
               key={book.id}
+              mario={book}
               {...book}
               editFormHandler={editFormHandler}
               toggleIsRead={toggleIsRead}
@@ -59,10 +64,12 @@ const Books = ({
               books={books}
               setBooks={setBooks}
               pagesHandler={pagesHandler}
+              editBook={editBook}
             />
           ) : (
             <Book
               key={book.id}
+              mario={book}
               {...book}
               deleteBook={deleteBook}
               editFormHandler={editFormHandler}

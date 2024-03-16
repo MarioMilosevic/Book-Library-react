@@ -22,6 +22,8 @@ const Form = ({
     author: "",
     pages: "",
     isRead: false,
+    isEditing:false,
+    id:crypto.randomUUID()
   });
 
   const handleSubmit = (e) => {
@@ -31,6 +33,8 @@ const Form = ({
       author: value.author,
       pages: value.pages,
       isRead: value.isRead,
+      isEditing:value.isEditing,
+      id:value.id
     };
     setBooks((prev) => [...prev, newBook]);
     setValue({
@@ -38,6 +42,7 @@ const Form = ({
     author: "",
     pages: "",
     isRead: false,
+    id:""
     });
     setIsModalActive(false)
   };
