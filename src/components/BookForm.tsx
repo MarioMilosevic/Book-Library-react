@@ -17,15 +17,8 @@ const BookForm = ({
   isRead,
   books,
   setBooks,
-  bookData,
-  setValue,
-  titleHandler,
-  authorHandler,
-  pagesHandler,
-  editBook,
-  book,
+  toggleIsRead,
 }: BookFormType) => {
-
   const initialFormState = {
     title,
     author,
@@ -33,29 +26,31 @@ const BookForm = ({
     isRead,
     isEditing,
     id,
-  }
-  const [formValue, setFormValue] = useState(initialFormState
-  );
-
-  const updateBook = (id: number | string) => {
-    setBooks((books) =>
-      books.map((book) =>
-        book.id === id ? { ...formValue } : book
-      )
+  };
+  const [formValue, setFormValue] = useState(initialFormState);
+console.log(formValue)
+  const updateBook = (
+    id: number | string,
+  ) => {
+    console.log(id);
+    setBooks((prev) =>
+      prev.map((book) => (book.id === id ? { ...book, ...formValue, isEditing:!book.isEditing } : book))
     );
-    console.log(formValue)
-    setFormValue(initialFormState)
-    editFormHandler(id);
+  //  editFormHandler(id);
+
   };
 
-  const toggleIsRead = (id: number | string) => {
-    console.log(books)
-    setBooks(
-      books.map((book) =>
-        book.id === id ? { ...book, isRead: !book.isRead } : book
-      )
-    );
+  // const updatedBooks = books.map((book) =>
+  //   book.id === id ? { ...book , title:formValue.title, author:formValue.author, pages:formValue.pages} : book
+  // );
+  // setBooks(updatedBooks);
+  // console.log(formValue);
+  // setFormValue(initialFormState);
+  // editFormHandler(id);
+  const toggleIsRead2 = (id: number | string) => {
+  setFormValue(prev => ({...prev, isEditing:!isEditing}))
   };
+
 
   const updatePages = (e) => {
     const inputValue = e.target.value < 0 ? 0 : e.target.value;
@@ -68,7 +63,7 @@ const BookForm = ({
         type="text"
         value={formValue.title}
         className="text-3xl pl-4 py-1 rounded-lg mb-4 w-full text-center"
-        onInput={(e) =>
+        onChange={(e) =>
           setFormValue((prev) => ({ ...prev, title: e.target.value }))
         }
       ></input>
@@ -76,7 +71,7 @@ const BookForm = ({
         type="text"
         value={formValue.author}
         className="text-2xl pl-4 py-1 rounded-lg mb-4 w-full text-center"
-        onInput={(e) =>
+        onChange={(e) =>
           setFormValue((prev) => ({ ...prev, author: e.target.value }))
         }
       ></input>
@@ -84,12 +79,11 @@ const BookForm = ({
         type="number"
         value={formValue.pages}
         className="text-xl py-1 rounded-lg w-full pl-4 text-center"
-        onInput={updatePages}
+        onChange={updatePages}
       ></input>
       <div className="pt-8 flex justify-center gap-8">
-        {/* <ActionButton handleClick={() => toggleIsRead(id)} color={`bg-sky-400`}> */}
-        <ActionButton handleClick={() => toggleIsRead(id)} color={`bg-sky-400`}>
-          {isRead ? "Read ✔" : "Not Read ❌"}
+        <ActionButton handleClick={() => setFormValue((prev)=> ({...prev, isEditing:!formValue.isEditing}))} color={`bg-sky-400`}>
+          {formValue.isRead ? "Read ✔" : "Not Read ❌"}
         </ActionButton>
         <ActionButton color="bg-sky-400" handleClick={() => updateBook(id)}>
           Save Changes

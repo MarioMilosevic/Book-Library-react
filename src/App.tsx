@@ -14,41 +14,19 @@ export interface Book {
 function App() {
   const [isModalActive, setIsModalActive] = useState(false);
   const [books, setBooks] = useState<Book[]>([]);
-  const [bookData, setBookData] = useState({
-    title: "",
-    author: "",
-    pages: "",
-    isRead: false,
-    isEditing: false,
-    id: crypto.randomUUID(),
-  });
 
-
-  const booksHandler = (e) => {
-    e.preventDefault();
-    setIsModalActive(false);
-    setBooks(prevBooks => [...prevBooks, bookData]);
-    setBookData(formData) 
-    setBookData({})
-  };
   return (
     <>
       <Header setIsModalActive={setIsModalActive} />
       <Books
         books={books}
         setBooks={setBooks}
-        bookData={bookData}
-        setBookData={setBookData}
-        booksHandler={booksHandler}
       />
       {isModalActive && (
         <Form
-          bookData={bookData}
-          setBookData={setBookData}
           books={books}
           setBooks={setBooks}
           setIsModalActive={setIsModalActive}
-          booksHandler={booksHandler}
         />
       )}
     </>

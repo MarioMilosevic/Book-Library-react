@@ -6,18 +6,9 @@ interface Form {
   setBooks: Dispatch<SetStateAction<Book[]>>;
   books: Book[];
 }
-const Form = ({
-  setIsModalActive,
-  setBooks,
-  books,
-  bookData,
-  setBookData,
-  // titleHandler,
-  // authorHandler,
-  // pagesHandler,
-  booksHandler,
-}: Form) => {
-  const [value, setValue] = useState({
+const Form = ({ setIsModalActive, setBooks }: Form) => {
+
+  const [bookInputs, setBookInputs] = useState({
     title: "",
     author: "",
     pages: "",
@@ -27,19 +18,9 @@ const Form = ({
   });
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const newBook = {
-      title: value.title,
-      author: value.author,
-      pages: value.pages,
-      isRead: value.isRead,
-      isEditing: value.isEditing,
-      id: value.id,
-    };
-
-    setBooks((prev) => [...prev, newBook]);
-    setValue({
+    e.preventDefault()
+    setBooks((prev) => [...prev, bookInputs]);
+    setBookInputs({
       title: "",
       author: "",
       pages: "",
@@ -49,19 +30,19 @@ const Form = ({
     setIsModalActive(false);
   };
 
-  const titleHandler2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((prev) => ({ ...prev, title: e.target.value }));
+  const titleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBookInputs((prev) => ({ ...prev, title: e.target.value }));
   };
 
-  const authorHandler2 = (e) => {
-    setValue((prev) => ({ ...prev, author: e.target.value }));
+  const authorHandler = (e) => {
+    setBookInputs((prev) => ({ ...prev, author: e.target.value }));
   };
-  const pagesHandler2 = (e) => {
-    setValue((prev) => ({ ...prev, pages: e.target.value }));
+  const pagesHandler = (e) => {
+    setBookInputs((prev) => ({ ...prev, pages: e.target.value }));
   };
 
   const checkBoxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((prev) => ({ ...prev, isRead: e.target.checked }));
+    setBookInputs((prev) => ({ ...prev, isRead: e.target.checked }));
   };
 
   return (
@@ -77,20 +58,22 @@ const Form = ({
           heading="Title of the book:"
           placeholder="Lord of the Rings"
           id={"title"}
-          value={value.title}
-          inputHandler={titleHandler2}
+          value={bookInputs.title}
+          inputHandler={titleHandler}
         />
         <InputField
           heading="Author:"
           placeholder="J.R.R. Tolkien"
+          value={bookInputs.author}
           id={"author"}
-          inputHandler={authorHandler2}
+          inputHandler={authorHandler}
         />
         <InputField
           heading="Number of pages:"
           placeholder="300"
+          value={bookInputs.pages}
           id={"pages"}
-          inputHandler={pagesHandler2}
+          inputHandler={pagesHandler}
         />
 
         <div className="pt-10 gap-12 flex items-center justify-between ">
