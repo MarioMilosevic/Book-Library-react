@@ -26,10 +26,14 @@ const Book = ({
       <h2 className="text-2xl pb-4">{author}</h2>
       <span className="text-xl">{pages} pages</span>
       <div className="pt-8 flex justify-center gap-8">
-        <ActionButton color={`bg-sky-400`}>
+        <button
+          className={
+            "bg-sky-400 text-xl text-sky-50 rounded-lg px-4 py-2 duration-300"
+          }
+        >
           {isRead ? "Read ✔" : "Not Read ❌"}
-        </ActionButton>
-      
+        </button>
+
         <ActionButton
           handleClick={() => editFormHandler(id)}
           color={`bg-emerald-400`}

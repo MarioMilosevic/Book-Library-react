@@ -12,12 +12,9 @@ const BookForm = ({
   author,
   pages,
   isEditing,
-  editFormHandler,
   id,
   isRead,
-  books,
   setBooks,
-  toggleIsRead,
 }: BookFormType) => {
   const initialFormState = {
     title,
