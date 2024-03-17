@@ -28,29 +28,20 @@ const BookForm = ({
     id,
   };
   const [formValue, setFormValue] = useState(initialFormState);
-console.log(formValue)
-  const updateBook = (
-    id: number | string,
-  ) => {
+  console.log(formValue);
+  const updateBook = (id: number | string) => {
     console.log(id);
     setBooks((prev) =>
-      prev.map((book) => (book.id === id ? { ...book, ...formValue, isEditing:!book.isEditing } : book))
+      prev.map((book) =>
+        book.id === id
+          ? {
+              ...formValue,
+              isEditing: !book.isEditing,
+            }
+          : book
+      )
     );
-  //  editFormHandler(id);
-
   };
-
-  // const updatedBooks = books.map((book) =>
-  //   book.id === id ? { ...book , title:formValue.title, author:formValue.author, pages:formValue.pages} : book
-  // );
-  // setBooks(updatedBooks);
-  // console.log(formValue);
-  // setFormValue(initialFormState);
-  // editFormHandler(id);
-  const toggleIsRead2 = (id: number | string) => {
-  setFormValue(prev => ({...prev, isEditing:!isEditing}))
-  };
-
 
   const updatePages = (e) => {
     const inputValue = e.target.value < 0 ? 0 : e.target.value;
@@ -82,7 +73,12 @@ console.log(formValue)
         onChange={updatePages}
       ></input>
       <div className="pt-8 flex justify-center gap-8">
-        <ActionButton handleClick={() => setFormValue((prev)=> ({...prev, isEditing:!formValue.isEditing}))} color={`bg-sky-400`}>
+        <ActionButton
+          handleClick={() =>
+            setFormValue((prev) => ({ ...prev, isRead: !isRead }))
+          }
+          color={`bg-sky-400`}
+        >
           {formValue.isRead ? "Read ✔" : "Not Read ❌"}
         </ActionButton>
         <ActionButton color="bg-sky-400" handleClick={() => updateBook(id)}>
